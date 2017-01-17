@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-openURL-" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/17/openURL-/" class="article-date">
+  <time datetime="2017-01-17T08:25:16.000Z" itemprop="datePublished">2017-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/17/openURL-/">iOS10 新openURL的特性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="openURL"><a href="#openURL" class="headerlink" title="openURL:"></a>openURL:</h2><p>在iOS10之前，我们常使用<code>openURL：</code>来实现一些在应用内打开一些外部链接的需求。并且利用<code>canOpenURL：</code>来进行跳转的判断。</p>
+<h2 id="iOS10"><a href="#iOS10" class="headerlink" title="iOS10"></a>iOS10</h2><p>iOS出现了新的替代方法<code>openURL:options:completionHandler:</code></p>
+<p>Apple官方文档描述如下：</p>
+<pre><code> The new UIApplication method openURL:options:completionHandler:, which is executed asynchronously and 
+calls the specified completion handler on the main queue (this method replaces openURL:).
+</code></pre><p>简单理解为：异步执行openURL操作和主线程执行回调判断跳转success.</p>
+<h2 id="option："><a href="#option：" class="headerlink" title="option："></a>option：</h2><p>options目前可传入参数Key在UIApplication头文件只有一个:UIApplicationOpenURLOptionUniversalLinksOnly,其对应的Value为布尔值,默认为False.若传入YES则代表只能通过该URL应用打开，并不能通过Safari打开URL链接</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h2><p><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;http://www.baidu.com&quot;] options:@{} completionHandler:^(BOOL success) {
+}];</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://prarnoman.com/2017/01/17/openURL-/" data-id="ciy19amcg0002i4s6rohc4b0c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/16/hello-world/" class="article-date">
@@ -91,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/16/hello-world/" data-id="cixzugj3100007ms6na7ypqz7" class="article-share-link">Share</a>
+      <a data-url="http://prarnoman.com/2017/01/16/hello-world/" data-id="ciy19amce0001i4s6aaf18l0h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -186,7 +231,7 @@ timezone: Asia/Shanghai
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/16/hexo+GitHub/" data-id="cixzugj3600017ms63gxp2ylo" class="article-share-link">Share</a>
+      <a data-url="http://prarnoman.com/2017/01/16/hexo+GitHub/" data-id="ciy19amc90000i4s6eclhg90d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,6 +269,10 @@ timezone: Asia/Shanghai
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/17/openURL-/">iOS10 新openURL的特性</a>
+          </li>
         
           <li>
             <a href="/2017/01/16/hello-world/">Hello World</a>

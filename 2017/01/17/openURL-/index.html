@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | In me the tiger sniffe the rose．</title>
+  <title>iOS10 新openURL的特性 | In me the tiger sniffe the rose．</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个嗜好太多能力太小的普通人。">
+  <meta name="description" content="openURL:在iOS10之前，我们常使用openURL：来实现一些在应用内打开一些外部链接的需求。并且利用canOpenURL：来进行跳转的判断。
+iOS10iOS出现了新的替代方法openURL:options:completionHandler:
+Apple官方文档描述如下：
+ The new UIApplication method openURL:options:completionH">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://prarnoman.com/2017/01/16/hello-world/index.html">
+<meta property="og:title" content="iOS10 新openURL的特性">
+<meta property="og:url" content="http://prarnoman.com/2017/01/17/openURL-/index.html">
 <meta property="og:site_name" content="In me the tiger sniffe the rose．">
-<meta property="og:description" content="一个嗜好太多能力太小的普通人。">
-<meta property="og:updated_time" content="2017-01-16T08:47:21.000Z">
+<meta property="og:description" content="openURL:在iOS10之前，我们常使用openURL：来实现一些在应用内打开一些外部链接的需求。并且利用canOpenURL：来进行跳转的判断。
+iOS10iOS出现了新的替代方法openURL:options:completionHandler:
+Apple官方文档描述如下：
+ The new UIApplication method openURL:options:completionH">
+<meta property="og:updated_time" content="2017-01-17T08:28:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="一个嗜好太多能力太小的普通人。">
+<meta name="twitter:title" content="iOS10 新openURL的特性">
+<meta name="twitter:description" content="openURL:在iOS10之前，我们常使用openURL：来实现一些在应用内打开一些外部链接的需求。并且利用canOpenURL：来进行跳转的判断。
+iOS10iOS出现了新的替代方法openURL:options:completionHandler:
+Apple官方文档描述如下：
+ The new UIApplication method openURL:options:completionH">
   
     <link rel="alternate" href="/atom.xml" title="In me the tiger sniffe the rose．" type="application/atom+xml">
   
@@ -63,10 +72,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-openURL-" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/16/hello-world/" class="article-date">
-  <time datetime="2017-01-16T07:50:19.000Z" itemprop="datePublished">2017-01-16</time>
+    <a href="/2017/01/17/openURL-/" class="article-date">
+  <time datetime="2017-01-17T08:25:16.000Z" itemprop="datePublished">2017-01-17</time>
 </a>
     
   </div>
@@ -77,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      iOS10 新openURL的特性
     </h1>
   
 
@@ -85,12 +94,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一个嗜好太多能力太小的普通人。</p>
+        <h2 id="openURL"><a href="#openURL" class="headerlink" title="openURL:"></a>openURL:</h2><p>在iOS10之前，我们常使用<code>openURL：</code>来实现一些在应用内打开一些外部链接的需求。并且利用<code>canOpenURL：</code>来进行跳转的判断。</p>
+<h2 id="iOS10"><a href="#iOS10" class="headerlink" title="iOS10"></a>iOS10</h2><p>iOS出现了新的替代方法<code>openURL:options:completionHandler:</code></p>
+<p>Apple官方文档描述如下：</p>
+<pre><code> The new UIApplication method openURL:options:completionHandler:, which is executed asynchronously and 
+calls the specified completion handler on the main queue (this method replaces openURL:).
+</code></pre><p>简单理解为：异步执行openURL操作和主线程执行回调判断跳转success.</p>
+<h2 id="option："><a href="#option：" class="headerlink" title="option："></a>option：</h2><p>options目前可传入参数Key在UIApplication头文件只有一个:UIApplicationOpenURLOptionUniversalLinksOnly,其对应的Value为布尔值,默认为False.若传入YES则代表只能通过该URL应用打开，并不能通过Safari打开URL链接</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h2><p><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;http://www.baidu.com&quot;] options:@{} completionHandler:^(BOOL success) {
+}];</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/16/hello-world/" data-id="ciy19amce0001i4s6aaf18l0h" class="article-share-link">Share</a>
+      <a data-url="http://prarnoman.com/2017/01/17/openURL-/" data-id="ciy19amcg0002i4s6rohc4b0c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -99,19 +116,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/01/17/openURL-/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          iOS10 新openURL的特性
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/16/hexo+GitHub/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/01/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">使用hexo+GitHub搭建博客</div>
+      <div class="article-nav-title">Hello World</div>
     </a>
   
 </nav>
