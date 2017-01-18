@@ -3,17 +3,39 @@
 <head>
   <meta charset="utf-8">
   
-  <title>In me the tiger sniffe the rose．</title>
+  <title>Block(一)：语法与基本使用 | In me the tiger sniffe the rose．</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="戒掉那个总是就随随便便放弃的自己。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="In me the tiger sniffe the rose．">
-<meta property="og:url" content="http://prarnoman.com/index.html">
+  <meta name="description" content="Block概要块（Block）是Objective-c对ANSI C做的扩展：带有自动变量（局部变量）的匿名函数。
+我们先来看看C语言下的函数：
+int func(int count);
+int result = func(1);
+C语言不允许使用匿名函数，而且调用函数的时候也需要用函数名func来调用函数。
+再来看看函数指针的调用情况:
+int result = (*funcPtr)(1);
+看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Block(一)：语法与基本使用">
+<meta property="og:url" content="http://prarnoman.com/2017/01/18/Block/index.html">
 <meta property="og:site_name" content="In me the tiger sniffe the rose．">
-<meta property="og:description" content="戒掉那个总是就随随便便放弃的自己。">
+<meta property="og:description" content="Block概要块（Block）是Objective-c对ANSI C做的扩展：带有自动变量（局部变量）的匿名函数。
+我们先来看看C语言下的函数：
+int func(int count);
+int result = func(1);
+C语言不允许使用匿名函数，而且调用函数的时候也需要用函数名func来调用函数。
+再来看看函数指针的调用情况:
+int result = (*funcPtr)(1);
+看">
+<meta property="og:updated_time" content="2017-01-18T10:02:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="In me the tiger sniffe the rose．">
-<meta name="twitter:description" content="戒掉那个总是就随随便便放弃的自己。">
+<meta name="twitter:title" content="Block(一)：语法与基本使用">
+<meta name="twitter:description" content="Block概要块（Block）是Objective-c对ANSI C做的扩展：带有自动变量（局部变量）的匿名函数。
+我们先来看看C语言下的函数：
+int func(int count);
+int result = func(1);
+C语言不允许使用匿名函数，而且调用函数的时候也需要用函数名func来调用函数。
+再来看看函数指针的调用情况:
+int result = (*funcPtr)(1);
+看">
   
     <link rel="alternate" href="/atom.xml" title="In me the tiger sniffe the rose．" type="application/atom+xml">
   
@@ -62,9 +84,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Block" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Block" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/01/18/Block/" class="article-date">
   <time datetime="2017-01-18T03:05:17.000Z" itemprop="datePublished">2017-01-18</time>
@@ -77,8 +97,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/Block/">Block(一)：语法与基本使用</a>
+    <h1 class="article-title" itemprop="name">
+      Block(一)：语法与基本使用
     </h1>
   
 
@@ -194,187 +214,19 @@ blk();
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-openURL-" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/17/openURL-/" class="article-date">
-  <time datetime="2017-01-17T08:25:16.000Z" itemprop="datePublished">2017-01-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/17/openURL-/">iOS10 新openURL的特性</a>
-    </h1>
+    <a href="/2017/01/17/openURL-/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS10 新openURL的特性</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="openURL"><a href="#openURL" class="headerlink" title="openURL:"></a>openURL:</h2><p>在iOS10之前，我们常使用<code>openURL：</code>来实现一些在应用内打开一些外部链接的需求。并且利用<code>canOpenURL：</code>来进行跳转的判断。</p>
-<h2 id="iOS10"><a href="#iOS10" class="headerlink" title="iOS10"></a>iOS10</h2><p>iOS出现了新的替代方法<code>openURL:options:completionHandler:</code></p>
-<p>Apple官方文档描述如下：</p>
-<pre><code> The new UIApplication method openURL:options:completionHandler:, which is executed asynchronously and 
-calls the specified completion handler on the main queue (this method replaces openURL:).
-</code></pre><p>简单理解为：异步执行openURL操作和主线程执行回调判断跳转success.</p>
-<h2 id="option："><a href="#option：" class="headerlink" title="option："></a>option：</h2><p>options目前可传入参数Key在UIApplication头文件只有一个:UIApplicationOpenURLOptionUniversalLinksOnly,其对应的Value为布尔值,默认为False.若传入YES则代表只能通过该URL应用打开，并不能通过Safari打开URL链接</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h2><p><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;http://www.baidu.com&quot;] options:@{} completionHandler:^(BOOL success) {
-}];</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/17/openURL-/" data-id="ciy2ru1ur0002vps64ftmer05" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/16/hello-world/" class="article-date">
-  <time datetime="2017-01-16T07:50:19.000Z" itemprop="datePublished">2017-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一个嗜好太多能力太小的普通人。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/16/hello-world/" data-id="ciy2ru1uo0001vps6oe1gcgyu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexo+GitHub" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/16/hexo+GitHub/" class="article-date">
-  <time datetime="2017-01-16T07:30:01.000Z" itemprop="datePublished">2017-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/16/hexo+GitHub/">使用hexo+GitHub搭建博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>注：我使用的macOS Sierra， Windows下基本无差别。</p>
-<h2 id="1-GitHub账号"><a href="#1-GitHub账号" class="headerlink" title="1.GitHub账号"></a>1.GitHub账号</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p><img src="http://upload-images.jianshu.io/upload_images/291600-bf68e5e46e09a1a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>点击<code>New repository</code>效果如下图</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/291600-7cec7b9f28359ea5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>注意：你的repository名字要与你的GitHub账号名字相同，有可能会出现404的显示结果。</strong> </p>
-<h3 id="生成添加秘钥"><a href="#生成添加秘钥" class="headerlink" title="生成添加秘钥"></a>生成添加秘钥</h3><p>在终端输入：</p>
-<p><code>ssh -keygen -t rsa -C &quot;GitHub的注册邮箱&quot;</code></p>
-<p>enter之后会在你的目录下生成两个文件：xxx_rsa xxx_rsa.pub(xxx名字是用户自己在终端输入生成的)。用mac自带记事本打开.pub文件，复制里面内容。<br>找到GitHub的Personal settings的下的 SSH and GPG keys选项。<br>入口:<br><a href="https://github.com/settings/keys" target="_blank" rel="external">https://github.com/settings/keys</a><br>讲复制内容粘贴到SSH Key的输入框，title的内容随意，点击</p>
-<p><code>Add SSH key</code></p>
-<p>即可。</p>
-<h2 id="2-安装node-js"><a href="#2-安装node-js" class="headerlink" title="2.安装node.js"></a>2.安装node.js</h2><p>按照<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载安装即可。</p>
-<h2 id="3-安装git"><a href="#3-安装git" class="headerlink" title="3.安装git"></a>3.安装git</h2><p>由于我的电脑装有Xcode，自带Git，故和我一样的xcode的mac用户请跳过此步骤。<br>其他用户点击<a href="https://git-scm.com/downloads" target="_blank" rel="external">这里</a>下载安装git，如下图。<br><img src="http://upload-images.jianshu.io/upload_images/291600-25cf02703765ff4e.png?imageMogr2/auto-orient/strip%7CimageView2/2" alt=""></p>
-<h2 id="4-安装配置hexo"><a href="#4-安装配置hexo" class="headerlink" title="4.安装配置hexo"></a>4.安装配置hexo</h2><p>因为<a href="https://hexo.io/" target="_blank" rel="external">hexo</a>是一款基于<a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a>的静态博客框架，前面安装的node.js就是为它准备的，它也是我们搭建博客的关键。</p>
-<h3 id="1-打开终端，进入博客的本地放置路径，输入如下指令："><a href="#1-打开终端，进入博客的本地放置路径，输入如下指令：" class="headerlink" title="(1)打开终端，进入博客的本地放置路径，输入如下指令："></a>(1)打开终端，进入博客的本地放置路径，输入如下指令：</h3><p><code>$ npm install -g hexo-cli</code></p>
-<p>若提示error，请输入：</p>
-<p><code>$ sudo npm install -g hexo-cli</code></p>
-<p>按照命令号安装,安装好hexo，在终端输入:</p>
-<p><code>$ hexo</code></p>
-<p>终端显示如下，安装成功：<br><img src="http://upload-images.jianshu.io/upload_images/291600-34e4d1af45d6f267.png?imageMogr2/auto-orient/strip%7CimageView2/2" alt=""></p>
-<h3 id="2-初始化博客配置文件"><a href="#2-初始化博客配置文件" class="headerlink" title="(2)初始化博客配置文件"></a>(2)初始化博客配置文件</h3><p>   a.在你的博客目录下创建文件夹，初始化。</p>
-<pre><code>$ hexo init xxx
-</code></pre><p>  b.进入博客文件夹。</p>
-<pre><code>$ cd xxx
-</code></pre><p>   c.node.js命令，安装博客所需要的依赖包。</p>
-<pre><code>$ nmp install
-</code></pre><p> 初始化成功后，文件夹结构如下图所示：</p>
-<p> <img src="http://upload-images.jianshu.io/upload_images/291600-9b841f932140214d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h3 id="3-配置博客信息"><a href="#3-配置博客信息" class="headerlink" title="(3)配置博客信息"></a>(3)配置博客信息</h3><p>找到_config.yml文件。</p>
-<p>1.修改网站相关信息</p>
-<pre><code>title: paranorman
-subtitle: 
-description: 
-author: paranorman
-language: zh-CN
-timezone: Asia/Shanghai
-</code></pre><p>注意：每一项的填写<code>:</code>后面都要保留一个空格，下同。</p>
-<p>2.配置个人域名</p>
-<pre><code>url ：http:Paranorman-Reborn-ACL.github.io.com
-</code></pre><p> 对于root（根目录）、permalink（永久链接）、permalink_defaults（默认永久链接）等其他信息保持默认。</p>
-<p>3.配置部署。</p>
-<pre><code>deploy
-    type: git
-   repo: https://github.com/Paranorman-Reborn-ACL/Paranorman-Reborn-ACL.github.io.com
-      branch: master
-</code></pre><p>其中repo项是之前Github上创建好的仓库的地址，可以通过如下图所示的方式得到：<br><img src="http://upload-images.jianshu.io/upload_images/291600-973015a8b5aa2d03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>branch是项目的分支，我们默认用主分支master。</p>
-<p>4.发表一篇博客</p>
-<p><code>$ hexo new &quot;title&quot;</code></p>
-<p>我们可以在本地博客文件夹source-&gt;_post文件夹下看到我们新建的markdown文件。</p>
-<p>5.本地发布</p>
-<p><code>$ hexo server</code></p>
-<p>成功后下是如下：<br><img src="http://upload-images.jianshu.io/upload_images/291600-df83a54c79bcd507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>浏览器输入url就可以看见我们的博客。</p>
-<p>6.博客部署到GitHub</p>
-<p><code>$ hexo deploy</code></p>
-<p>如提示如下错误:</p>
-<p><code>ERROR Deployer not found: git</code></p>
-<p>输入如下指令：</p>
-<p><code>npm install hexo-deployer-git --save</code></p>
-<p>重新部署。</p>
-<p>在浏览器输入GitHub部署网址即可，之前仓库的后缀名：yourname.github.io。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/16/hexo+GitHub/" data-id="ciy2ru1uk0000vps6jckyvgu6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
