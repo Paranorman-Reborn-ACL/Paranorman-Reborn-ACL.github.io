@@ -25,7 +25,7 @@ C语言不允许使用匿名函数，而且调用函数的时候也需要用函�
 再来看看函数指针的调用情况:
 int result = (*funcPtr)(1);
 看">
-<meta property="og:updated_time" content="2017-01-18T10:02:16.000Z">
+<meta property="og:updated_time" content="2017-01-20T02:31:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block(一)：语法与基本使用">
 <meta name="twitter:description" content="Block概要块（Block）是Objective-c对ANSI C做的扩展：带有自动变量（局部变量）的匿名函数。
@@ -201,14 +201,21 @@ void ( ^blk)(void) = ^{
     NSLog(@&quot; %c&quot;, text[1]);
 };
 blk();
-</code></pre><h2 id="全局块、栈块及堆块"><a href="#全局块、栈块及堆块" class="headerlink" title="全局块、栈块及堆块"></a>全局块、栈块及堆块</h2><p>定义块的时候，其所占的内存区域是分配在栈中的。这就是说，块只在定义它的那个范围内有效。（ARC下编译器帮助我们做了copy操作）</p>
-<p>为了解决此问题，可给块对象发送copy消息拷贝。这样就可以把块从栈内存复制到堆内存。而且，一旦复制到堆上，块就成了带引用计数的对象了。</p>
+</code></pre><h2 id="全局块、栈块及堆块"><a href="#全局块、栈块及堆块" class="headerlink" title="全局块、栈块及堆块"></a>全局块、栈块及堆块</h2><p>定义块的时候，其所占的内存区域是分配在栈中的。这就是说，块只在定义它的那个范围内有效。（ARC下编译器大多数情况下会判断帮助我们做了copy操作）<br>例如：Block作为函数返回值时，编译器认为你这个Block出了函数作用域依然有效，就会自动帮我们对Block对象做copy操作，保证Block从栈内存复制到堆内存上。但是，你的函数要是返回一个Blcok对象的数组，编译器就不知道是不是要帮你做这次Copy操作，这就需要我们自己copyBlcok对象。</p>
+<pre><code>-（Nsarry *）getBlcokArray {
+int val = 10；
+return [NSArray arrayWithObjects:
+            [^{NSlog(@&quot;%d&quot;, val);}copy],
+            [^{NSlog(@&quot;%d&quot;, val);}copy],nil];
+}
+(调用局部变量val保证Blcok不是全局的存储在静态数据区)
+</code></pre><p>为了解决此问题，可给块对象发送copy消息拷贝。这样就可以把块从栈内存复制到堆内存。而且，一旦复制到堆上，块就成了带引用计数的对象了。</p>
 <p>除了栈Blcok（MRC），堆Blcok，还有一种全局Blcok：<br>1.定义在函数外面的block是global类型的<br>2.定义在函数内部的block，但是没有捕获任何自动变量(包括oc对象)，那么它也是   全局的</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/18/Block/" data-id="ciy2s2c930000xas6q76a4pct" class="article-share-link">Share</a>
+      <a data-url="http://prarnoman.com/2017/01/18/Block/" data-id="ciy58wyue00000zs6g6eo587h" class="article-share-link">Share</a>
       
       
     </footer>
