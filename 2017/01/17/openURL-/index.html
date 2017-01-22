@@ -1,225 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>iOS10 新openURL的特性 | In me the tiger sniffe the rose．</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="openURL:在iOS10之前，我们常使用openURL：来实现一些在应用内打开一些外部链接的需求。并且利用canOpenURL：来进行跳转的判断。
-iOS10iOS出现了新的替代方法openURL:options:completionHandler:
-Apple官方文档描述如下：
- The new UIApplication method openURL:options:completionH">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS10 新openURL的特性">
-<meta property="og:url" content="http://prarnoman.com/2017/01/17/openURL-/index.html">
-<meta property="og:site_name" content="In me the tiger sniffe the rose．">
-<meta property="og:description" content="openURL:在iOS10之前，我们常使用openURL：来实现一些在应用内打开一些外部链接的需求。并且利用canOpenURL：来进行跳转的判断。
-iOS10iOS出现了新的替代方法openURL:options:completionHandler:
-Apple官方文档描述如下：
- The new UIApplication method openURL:options:completionH">
-<meta property="og:updated_time" content="2017-01-17T08:28:11.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS10 新openURL的特性">
-<meta name="twitter:description" content="openURL:在iOS10之前，我们常使用openURL：来实现一些在应用内打开一些外部链接的需求。并且利用canOpenURL：来进行跳转的判断。
-iOS10iOS出现了新的替代方法openURL:options:completionHandler:
-Apple官方文档描述如下：
- The new UIApplication method openURL:options:completionH">
-  
-    <link rel="alternate" href="/atom.xml" title="In me the tiger sniffe the rose．" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-
-</head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">In me the tiger sniffe the rose．</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://prarnoman.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-openURL-" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/17/openURL-/" class="article-date">
-  <time datetime="2017-01-17T08:25:16.000Z" itemprop="datePublished">2017-01-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      iOS10 新openURL的特性
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="openURL"><a href="#openURL" class="headerlink" title="openURL:"></a>openURL:</h2><p>在iOS10之前，我们常使用<code>openURL：</code>来实现一些在应用内打开一些外部链接的需求。并且利用<code>canOpenURL：</code>来进行跳转的判断。</p>
-<h2 id="iOS10"><a href="#iOS10" class="headerlink" title="iOS10"></a>iOS10</h2><p>iOS出现了新的替代方法<code>openURL:options:completionHandler:</code></p>
-<p>Apple官方文档描述如下：</p>
-<pre><code> The new UIApplication method openURL:options:completionHandler:, which is executed asynchronously and 
-calls the specified completion handler on the main queue (this method replaces openURL:).
-</code></pre><p>简单理解为：异步执行openURL操作和主线程执行回调判断跳转success.</p>
-<h2 id="option："><a href="#option：" class="headerlink" title="option："></a>option：</h2><p>options目前可传入参数Key在UIApplication头文件只有一个:UIApplicationOpenURLOptionUniversalLinksOnly,其对应的Value为布尔值,默认为False.若传入YES则代表只能通过该URL应用打开，并不能通过Safari打开URL链接</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h2><p><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;http://www.baidu.com&quot;] options:@{} completionHandler:^(BOOL success) {
-}];</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://prarnoman.com/2017/01/17/openURL-/" data-id="ciy5a9i4t000365s6bcp18e5a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/01/18/Block/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Block(一)：语法与基本使用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/01/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/01/20/为常用的Blcok创建typedef/">Block(二)：Blcok的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/18/Block/">Block(一)：语法与基本使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/17/openURL-/">iOS10 新openURL的特性</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/16/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/16/hexo+GitHub/">使用hexo+GitHub搭建博客</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Paranorman<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-  </div>
-</body>
-</html>
+extends ./_partial/layout.pug
+block content
+  include ./_partial/post_header.pug
+  .article-content
+    if page.photos && page.photos.length
+      div
+        each photo in page.photos
+          a.article-gallery-img.fancybox(href=photo)
+            img(src=photo)
+    | !{page.content}
+  .article-meta
+    if page.tags && page.tags.length
+      .tags
+        i.icon.icon-tag
+        | !{list_tags(page.tags)}
+    if page.tags && page.categories.length
+      .categories
+        i.icon.icon-category
+        | !{list_categories(page.categories)}
+  if theme.duoshuo.enable
+    .article-comment
+      #ds-thread.ds-thread(data-thread-key=page._id, data-title=page.title, data-url=config.url + url_for(page.path), site-name=theme.duoshuo.siteName)
+      script.
+        var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+        var duoshuoQuery = {short_name: siteName};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0] 
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+  ul.navication
+    li.home
+      a(href="/")
+        i.icon.icon-home
+    if page.prev && page.prev.path
+      li
+        a(href=url_for(page.prev.path))
+          i.icon.icon-arror-left
+    if page.next && page.next.path
+      li
+        a(href=url_for(page.next.path))
+          i.icon.icon-arror-right
