@@ -1,45 +1,318 @@
-extends ./_partial/layout.pug
-block content
-  include ./_partial/post_header.pug
-  .article-content
-    if page.photos && page.photos.length
-      div
-        each photo in page.photos
-          a.article-gallery-img.fancybox(href=photo)
-            img(src=photo)
-    | !{page.content}
-  .article-meta
-    if page.tags && page.tags.length
-      .tags
-        i.icon.icon-tag
-        | !{list_tags(page.tags)}
-    if page.tags && page.categories.length
-      .categories
-        i.icon.icon-category
-        | !{list_categories(page.categories)}
-  if theme.duoshuo.enable
-    .article-comment
-      #ds-thread.ds-thread(data-thread-key=page._id, data-title=page.title, data-url=config.url + url_for(page.path), site-name=theme.duoshuo.siteName)
-      script.
-        var siteName = document.getElementById('ds-thread').getAttribute('site-name');
-        var duoshuoQuery = {short_name: siteName};
-        (function() {
-          var ds = document.createElement('script');
-          ds.type = 'text/javascript';ds.async = true;
-          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-          ds.charset = 'UTF-8';
-          (document.getElementsByTagName('head')[0] 
-          || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-  ul.navication
-    li.home
-      a(href="/")
-        i.icon.icon-home
-    if page.prev && page.prev.path
-      li
-        a(href=url_for(page.prev.path))
-          i.icon.icon-arror-left
-    if page.next && page.next.path
-      li
-        a(href=url_for(page.next.path))
-          i.icon.icon-arror-right
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="戒掉那个总是就随随便便放弃的自己。">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Paranorman">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Block(二)：Blcok的使用"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="戒掉那个总是就随随便便放弃的自己。" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="心有猛虎细嗅蔷薇"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Block(二)：Blcok的使用 - 心有猛虎细嗅蔷薇</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">一个嗜好很多能力很小的普通人</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/Paranorman-Reborn-ACL">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://img.tuku.com/upload/attach/2013/06/95038-7ivjRK3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Block(二)：Blcok的使用</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-01-20
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="为常用的Blcok创建typedef"><a href="#为常用的Blcok创建typedef" class="headerlink" title="为常用的Blcok创建typedef"></a>为常用的Blcok创建typedef</h2><p>为了隐藏复杂的块类型，需要用到C语言的类型定义的特性：</p>
+<pre><code>typedef int (^NewBlockType)(BOOL flag, int value);
+</code></pre><p>blockType就被定义为一种需要BOOL和int两个参数，返回值为int型的新Blcok对象类型。</p>
+<pre><code>NewBlockType block = ^(BOOL flag, int value) {
+    //Block实现
+}；
+block(YES, 1);
+</code></pre><p>使用类型定义还有个好处，就是你打算重构Block的类型签名的时候会很方便。</p>
+<pre><code>//
+//  NetWorkHandler.h
+//  Block 
+//  Created by Paranorman on 2017/1/18.
+//  Copyright © 2017年 Paranorman. All rights reserved.
+
+#import &lt;Foundation/Foundation.h&gt;
+
+typedef void(^ PNetWorkCompletionHandlerWithError)(NSData *data, NSError *error);
+
+@interface NetWorkHandler : NSObject
+
+@property(nonatomic, strong) NSString *url;
+
+1.-(void)startWithCompletionHandler: (void(^)(NSData *data)) completion;
+2.+(void)startWithCompletionHandlerError:(PNetWorkCompletionHandlerWithError) completion;
+
+@end
+</code></pre><p>例如上面的.h文件 你里面有很多个带Block同类型参数的方法。当你需要重新构造该Block类型对象时候。1方法没有使用typedef，因此你需要在每一个方法名称上修改Block类型参数。但是你要是使用了typedef，你仅仅需要在类型定义的时候去修改Blcok类型参数。如果这个类有多个Blcok类型，这样会显得很方便。</p>
+<h2 id="用handler块降低代码分散程度"><a href="#用handler块降低代码分散程度" class="headerlink" title="用handler块降低代码分散程度"></a>用handler块降低代码分散程度</h2><p>当我们在写一些回调功能的时候，常常会用到delegate设计模式。但是代理设计模式的代码分散程度太高，换做Block回调就会简洁的多。</p>
+<p>假设上面的头文件就是我们的网络处理器，那么在.m文件中的实现大体如下:</p>
+<pre><code>- (void)startWithCompletionHandler:(void (^)(NSData *))completion {
+NSLog(@&quot;startWithCompletionHandler&quot;);
+if (completion) {
+    completion(nil);
+}}
+</code></pre><p>那么在使用这个网络请求对象的类里面处理业务逻辑就可以直接在Block的方法体内实现，这样比delegate看上去简洁的多。当然使用Block时候要注意避免构成保留环。</p>
+<pre><code>   NetWorkHandler *netHandler = [[NetWorkHandler alloc] init];
+[netHandler startWithCompletionHandler:^(NSData *data) {
+    NSLog(@&quot;%@&quot;, netHandler.url);
+    //
+}];
+</code></pre><h2 id="利用Block实现链式开发"><a href="#利用Block实现链式开发" class="headerlink" title="利用Block实现链式开发"></a>利用Block实现链式开发</h2><p>第三方框架Masonry在实现一个自动布局时候的实现代码:</p>
+<pre><code>[self.demoTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.equalTo(self.view).and.offset(100);
+    make.width.equalTo(self.view);
+    make.height.equalTo(@44);
+}];
+</code></pre><p> 其内部的设计思想就是利用oc的点语法来返回一个self，来继续调用自身的实例方法。</p>
+<pre><code> #import &lt;Foundation/Foundation.h&gt;
+@class Person;
+typedef Person *(^PersonBlcokType)(int i);
+
+@interface Person : NSObject
+
+-(PersonBlcokType)eat;
+-(PersonBlcokType)sleep;
+-(PersonBlcokType)dadoudou;
+
+@end
+
+@implementation Person
+
+- (PersonBlcokType)eat {
+return ^ Person *(int i) { NSLog(@&quot;eat&quot;); return self;};
+}
+
+- (PersonBlcokType)sleep {
+return ^ Person *(int i) { NSLog(@&quot;sleep&quot;); return self;};
+}
+
+- (PersonBlcokType)dadoudou {
+return ^ Person *(int i) { NSLog(@&quot;dadoudou&quot;); return self;};
+}
+</code></pre><p>在外部调用这个类会是这个样子：</p>
+<pre><code>Person *p = [[Person alloc] init];
+p.eat(1).sleep(1).dadoudou(1);
+</code></pre><p>利用Blcok返回自身对象来实现链式，利用Block的参数传递来修改类的一些数据属性，实现函数式。这就是Masonry内部的利用Block的例子。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/Paranorman-Reborn-ACL" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 Paranorman<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

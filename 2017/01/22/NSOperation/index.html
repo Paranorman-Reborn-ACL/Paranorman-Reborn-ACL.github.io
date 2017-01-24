@@ -1,45 +1,336 @@
-extends ./_partial/layout.pug
-block content
-  include ./_partial/post_header.pug
-  .article-content
-    if page.photos && page.photos.length
-      div
-        each photo in page.photos
-          a.article-gallery-img.fancybox(href=photo)
-            img(src=photo)
-    | !{page.content}
-  .article-meta
-    if page.tags && page.tags.length
-      .tags
-        i.icon.icon-tag
-        | !{list_tags(page.tags)}
-    if page.tags && page.categories.length
-      .categories
-        i.icon.icon-category
-        | !{list_categories(page.categories)}
-  if theme.duoshuo.enable
-    .article-comment
-      #ds-thread.ds-thread(data-thread-key=page._id, data-title=page.title, data-url=config.url + url_for(page.path), site-name=theme.duoshuo.siteName)
-      script.
-        var siteName = document.getElementById('ds-thread').getAttribute('site-name');
-        var duoshuoQuery = {short_name: siteName};
-        (function() {
-          var ds = document.createElement('script');
-          ds.type = 'text/javascript';ds.async = true;
-          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-          ds.charset = 'UTF-8';
-          (document.getElementsByTagName('head')[0] 
-          || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-  ul.navication
-    li.home
-      a(href="/")
-        i.icon.icon-home
-    if page.prev && page.prev.path
-      li
-        a(href=url_for(page.prev.path))
-          i.icon.icon-arror-left
-    if page.next && page.next.path
-      li
-        a(href=url_for(page.next.path))
-          i.icon.icon-arror-right
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="戒掉那个总是就随随便便放弃的自己。">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Paranorman">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="多线程之NSOperation"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="戒掉那个总是就随随便便放弃的自己。" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="心有猛虎细嗅蔷薇"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>多线程之NSOperation - 心有猛虎细嗅蔷薇</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">一个嗜好很多能力很小的普通人</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/Paranorman-Reborn-ACL">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://img.tuku.com/upload/attach/2013/06/95038-7ivjRK3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>多线程之NSOperation</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-01-22
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>今天无意间发现了NSOperationQueue的 </p>
+<pre><code>[operationQueue addOperations:@[block1, block2] waitUntilFinished:YES];
+</code></pre><p>阻塞线程的方法却开了新线程，所以就想review一下Operation。</p>
+<h1 id="NSOperation"><a href="#NSOperation" class="headerlink" title="NSOperation"></a>NSOperation</h1><p>我们知道NSoperaion和NSoperationQueue相当于apple帮我们在GCD层面上做了一次面向对象的封装。</p>
+<p>NSOperationQueue代表一个FIFO队列，它负责管理多个NSOperation。相当于GCD的 <code>dispatch queue t</code> 对象。</p>
+<p>而NSOperation代表一个多线程任务，相当于向队列添加任务时候的Block或者函数，总之就好比一个执行块。</p>
+<h2 id="NSOperation有三种使用方法"><a href="#NSOperation有三种使用方法" class="headerlink" title="NSOperation有三种使用方法:"></a>NSOperation有三种使用方法:</h2><h3 id="1-继承且重写NSOperation的main方法"><a href="#1-继承且重写NSOperation的main方法" class="headerlink" title="1.继承且重写NSOperation的main方法"></a>1.继承且重写NSOperation的main方法</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface LAGOperation : NSOperation
+
+@end
+
+#import &quot;LAGOperation.h&quot;
+
+@implementation LAGOperation
+
+- (void)main {
+ if (self.isCancelled) return;
+for (int i = 1; i &lt; 1000; i++) {
+    NSLog(@&quot;i = %d %@&quot;,i, [NSThread currentThread]);
+}
+}
+
+@end
+</code></pre><p>由于NSOperation是可以cancel的, 所以你需要在operation程序内部执行过程中判断当前operation是否已经被cancel了(isCancelled). 如果已经被cancel那就不往下执行了. 当你在外面调用[operation cancel]后, isCancelled会被置为YES.</p>
+<p>使用：</p>
+<pre><code>LAGOperation *operation = [[LAGOperation alloc] init];
+[operation start];
+</code></pre><p>打印：</p>
+<pre><code>2017-01-22 18:33:38.048 NSOperation[20463:684199] i = 1 &lt;NSThread: 0x608000262040&gt;{number = 1, name = main}
+</code></pre><p>NSOperation的start方法默认是同步的。</p>
+<h3 id="2-NSInvocationOperation"><a href="#2-NSInvocationOperation" class="headerlink" title="2.NSInvocationOperation"></a>2.NSInvocationOperation</h3><pre><code> NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(run:) object:@&quot;mj&quot;];
+[operation start];
+</code></pre><p>NSInvocationOperation对象，它是基于一个对象和selector来创建操作。</p>
+<h3 id="2-NSBlockOperation"><a href="#2-NSBlockOperation" class="headerlink" title="2.NSBlockOperation"></a>2.NSBlockOperation</h3><h3 id="同步执行一个操作"><a href="#同步执行一个操作" class="headerlink" title="同步执行一个操作"></a>同步执行一个操作</h3><pre><code>NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^(){
+NSLog(@&quot;执行了一个新的操作&quot;);}];
+[operation start];
+</code></pre><p>这里要注意：默认情况下，调用了start方法后并不会开一条新线程去执行操作，而是在当前线程同步执行操作。</p>
+<h3 id="并发执行多个操作"><a href="#并发执行多个操作" class="headerlink" title="并发执行多个操作"></a>并发执行多个操作</h3><pre><code>NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+    NSLog(@&quot;线程1:%@&quot;, [NSThread currentThread]);
+}];
+[blockOperation addExecutionBlock:^{
+    NSLog(@&quot;线程2:%@&quot;, [NSThread currentThread]);
+}];
+[blockOperation addExecutionBlock:^{
+    NSLog(@&quot;线程3:%@&quot;, [NSThread currentThread]);
+}];
+[blockOperation start];
+</code></pre><p>打印结果：</p>
+<pre><code>2017-01-22 19:06:34.593 NSOperation[20775:696139] 线程3:&lt;NSThread: 0x60000007db00&gt;{number = 4, name = (null)}
+2017-01-22 19:06:34.593 NSOperation[20775:696137] 线程2:&lt;NSThread: 0x60000007dac0&gt;{number = 3, name = (null)}
+2017-01-22 19:06:34.592 NSOperation[20775:696076] 线程1:&lt;NSThread: 0x6080000730c0&gt;{number = 1, name = main}
+</code></pre><p>结果显示：<code>addExecutionBlock</code>确实开辟了新的线程。但最大并发数是有上限的（包括主线程在内）。如果block数量大于了上限，那么剩下的Block就会等待某个线程空闲下来之后被分配到该线程，且依然是优先分配到主线程。</p>
+<h1 id="NSOperationQueue"><a href="#NSOperationQueue" class="headerlink" title="NSOperationQueue"></a>NSOperationQueue</h1><p>代表一个FIFO队列，它负责管理多个NSOperation。底层维护一个线程池，会按顺序启动线程来执行提交给该队列的NSOperation任务。</p>
+<pre><code>    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+NSBlockOperation *operation1 = [NSBlockOperation blockOperationWithBlock:^{
+    NSLog(@&quot;线程1:%@&quot;, [NSThread currentThread]);
+}];
+NSBlockOperation *operation2 = [NSBlockOperation blockOperationWithBlock:^{
+    NSLog(@&quot;线程2:%@&quot;, [NSThread currentThread]);
+}];
+NSBlockOperation *operation3 = [NSBlockOperation blockOperationWithBlock:^{
+    NSLog(@&quot;线程3:%@&quot;, [NSThread currentThread]);
+}];
+[queue addOperation:operation1];
+[queue addOperation:operation2];
+[queue addOperation:operation3];
+</code></pre><p>打印结果：</p>
+<pre><code>2017-01-22 19:30:50.472 NSOperation[21013:706206] 线程1:&lt;NSThread: 0x600000267800&gt;{number = 4, name = (null)}
+2017-01-22 19:30:50.472 NSOperation[21013:706205] 线程2:&lt;NSThread: 0x608000261e40&gt;{number = 3, name = (null)}
+2017-01-22 19:30:50.472 NSOperation[21013:706229] 线程3:&lt;NSThread: 0x60800026a280&gt;{number = 5, name = (null)}
+</code></pre><p><code>addOperation</code>方法确实把operation对象添加到了并发队列。</p>
+<h3 id="设置依赖"><a href="#设置依赖" class="headerlink" title="设置依赖"></a>设置依赖</h3><pre><code>[operation1 addDependency:operation3];
+</code></pre><p>operation1的执行线程永远要等operation3的执行线程结束才能start。且不会再新开线程，而是使用3和2先执行结束的线程执行任务1.</p>
+<h3 id="addOperations"><a href="#addOperations" class="headerlink" title="addOperations"></a>addOperations</h3><p>还有如下方法将operation数组添加到队列中，第二个参数设置为YES代表阻塞线程。</p>
+<pre><code> [queue addOperations:@[operation1, operation2, operation3]     waitUntilFinished:YES];
+
+ 2017-01-22 19:42:02.388 NSOperation[21104:710936] 线程3:&lt;NSThread: 0x60000006db80&gt;{number = 4, name = (null)}
+2017-01-22 19:42:02.388 NSOperation[21104:710937] 线程2:&lt;NSThread: 0x60000006a100&gt;{number = 3, name = (null)}
+2017-01-22 19:42:02.388 NSOperation[21104:710936] 线程1:&lt;NSThread: 0x60000006db80&gt;{number = 4, name = (null)}
+</code></pre><p>打印结果表明，虽然采用同步的方式将任务添加到队列中，任务的执行还是在子线程中进行。我们再来看一下GCD的同步添加到队列:</p>
+<pre><code>dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSLog(@&quot;线程1:%@&quot;, [NSThread currentThread]);
+});  dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSLog(@&quot;线程1:%@&quot;, [NSThread currentThread]);
+});
+dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSLog(@&quot;线程1:%@&quot;, [NSThread currentThread]);
+});
+
+2017-01-22 19:47:16.920 NSOperation[21254:714901] 线程1:&lt;NSThread: 0x6000002628c0&gt;{number = 1, name = main}
+2017-01-22 19:47:16.921 NSOperation[21254:714901] 线程1:&lt;NSThread: 0x6000002628c0&gt;{number = 1, name = main}
+2017-01-22 19:47:16.921 NSOperation[21254:714901] 线程1:&lt;NSThread: 0x6000002628c0&gt;{number = 1, name = main}
+</code></pre><p>注意：GCD的同步添加到全局并发队列的任务，是在主线程上执行的。<br>所以回到文章开头，operationQueue在主线程同步添加任务，不同于GCD的<code>dispatch_sync</code>，GCD是将任务直接添加到主线程上，所以才会阻塞主线程，而OperationQueue而是方法本身采用了一些方法阻塞当前主线程的执行（sleep方法？），造成阻塞。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/Paranorman-Reborn-ACL" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 Paranorman<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
