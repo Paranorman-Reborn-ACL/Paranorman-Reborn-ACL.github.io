@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="戒掉那个总是就随随便便放弃的自己。">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Paranorman">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Quartz 2D(四)：Quartz 2D使用（Bitmap Context）"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="戒掉那个总是就随随便便放弃的自己。" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="心有猛虎细嗅蔷薇"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Quartz 2D(四)：Quartz 2D使用（Bitmap Context） - 心有猛虎细嗅蔷薇</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">一个嗜好很多能力很小的普通人</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/Paranorman-Reborn-ACL">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://img.tuku.com/upload/attach/2013/06/95038-7ivjRK3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Quartz 2D(四)：Quartz 2D使用（Bitmap Context）</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-01-28
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="开启图片上下文"><a href="#开启图片上下文" class="headerlink" title="开启图片上下文"></a>开启图片上下文</h1><p>在<code>DrawRect</code>方法里面可以得到系统为我们创建的laye层的上下文，用来绘制在view上，输出图片的上下文（ImageContext）可以通过下面两个方法获得：<br><code>UIGraphicsBeginImageContext(CGSizeMake(100, 100));</code><br><code>UIGraphicsBeginImageContextWithOptions(CGSizeMake(200, 200), YES, 1);</code><br><strong>size：</strong>imageCotext的尺寸，即可以输出的图片尺寸是多大。</p>
+<p><strong>opaque:</strong> 不透明 通常设置为NO，保证上下文透明，设置为YES会在切割上下文后出现黑影。</p>
+<p><strong>scale:</strong> 上下文缩放比例。</p>
+<p>由于图片的上下文是我们自己开启的，使用完毕以后需要<strong>手动关闭:</strong><br><code>UIGraphicsEndImageContext();</code></p>
+<h1 id="为图片添加水印"><a href="#为图片添加水印" class="headerlink" title="为图片添加水印"></a>为图片添加水印</h1><p>1.开启图片上下文。</p>
+<pre><code>UIGraphicsBeginImageContextWithOptions(CGSizeMake(200, 200), NO, 1);
+</code></pre><p>2.将需要添加水印的图片添加到上下文中。</p>
+<pre><code>UIImage *image = [UIImage imageNamed:@&quot;image&quot;];
+[image drawAtPoint:CGPointZero];
+</code></pre><p>3.绘制水印。</p>
+<pre><code>NSString *logString = @&quot;logoString&quot;;
+   [logString drawAtPoint:CGPointMake(0, 180) withAttributes:@{NSForegroundColorAttributeName:[UIColor redColor], NSFontAttributeName:[UIFont systemFontOfSize:20]}];
+</code></pre><p> Attributes:添加富文本信息。</p>
+<p> 4.输出图片。</p>
+<pre><code>UIImage *outImage = UIGraphicsGetImageFromCurrentImageContext();
+</code></pre><p>5.关闭上下文。</p>
+<pre><code>UIGraphicsEndImageContext();
+</code></pre><p>6.使用上下文输出的图片。</p>
+<pre><code>_logoInageView.image = outImage;
+</code></pre><h1 id="合成图片"><a href="#合成图片" class="headerlink" title="合成图片"></a>合成图片</h1><p>与添加水印道理相同，就是把字符串的绘制替换为图片的绘制即可，不在赘述。</p>
+<h1 id="裁剪图片（UIBezierPath）"><a href="#裁剪图片（UIBezierPath）" class="headerlink" title="裁剪图片（UIBezierPath）"></a>裁剪图片（UIBezierPath）</h1><p>（以方形图片裁剪为圆形为例）</p>
+<p>1.得到源图片</p>
+<pre><code>UIImage *image = [UIImage imageNamed:@&quot;image&quot;];
+</code></pre><p>2.开启位图上下文。</p>
+<pre><code>UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+</code></pre><p>3.切割上下文之后的绘制区域（此裁剪区域不会影响你之前在上下文中绘制好的）</p>
+<pre><code>UIBezierPath *path = [UIBezierPath     bezierPathWithOvalInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+[path addClip];
+</code></pre><p>4.在切割后的上下文绘制区域绘制图片。</p>
+<pre><code>[image drawAtPoint:CGPointZero];
+</code></pre><p>5.取得上下文图片。</p>
+<pre><code>UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+</code></pre><p>6.关闭上下文。</p>
+<pre><code>UIGraphicsEndImageContext();
+</code></pre><p>7.使用图片。</p>
+<pre><code>_logoInageView.image = clipImage;
+</code></pre><h1 id="裁剪图片（CGPath切割路径）"><a href="#裁剪图片（CGPath切割路径）" class="headerlink" title="裁剪图片（CGPath切割路径）"></a>裁剪图片（CGPath切割路径）</h1><p>1.开启上下文，得到上下文。</p>
+<pre><code>UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+CGContextRef ctx = UIGraphicsGetCurrentContext();
+</code></pre><p>2.绘制切割路径，添加到上下文中。</p>
+<pre><code> CGMutablePathRef path = CGPathCreateMutable();
+CGPathAddRoundedRect(path, nil, CGRectMake(0, 0, image.size.width, image.size.height), image.size.width/2, image.size.height/2);
+ CGContextAddPath(ctx, path);
+</code></pre><p>3.按照此时上下文中的闭合路径切割绘制区域。</p>
+<pre><code>CGContextClip(ctx);
+</code></pre><p>4.在切割后的区域用图片绘制上下文。</p>
+<pre><code>[image drawAtPoint:CGPointZero];
+</code></pre><p>5.得到上下文图片。</p>
+<pre><code>UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+</code></pre><p>6.关闭上下文。</p>
+<pre><code>UIGraphicsEndImageContext();
+</code></pre><h1 id="擦除图片（淘宝刮刮乐大体实现）"><a href="#擦除图片（淘宝刮刮乐大体实现）" class="headerlink" title="擦除图片（淘宝刮刮乐大体实现）"></a>擦除图片（淘宝刮刮乐大体实现）</h1><p>需要实现图片擦除，需要在imageView上添加一个拖动手势pan，在手势方法</p>
+<p><code>- (void)pan:(UIPanGestureRecognizer *)pan {
+}</code></p>
+<p>里面处理图片上下文相关业务逻辑。</p>
+<p>1.判断手指擦除区域。</p>
+<pre><code>CGPoint currrenPoint = [pan locationInView:_imageView]; //手指当前触摸点
+CGFloat clearRadius = 10; //擦除半径
+CGFloat originX = currrenPoint.x - clearRadius; 
+CGFloat originY = currrenPoint.y - clearRadius;
+CGRect clearArea = CGRectMake(originX, originY, clearRadius*2, clearRadius*2); //手指擦除区域
+</code></pre><p>2.开启位图上下文。</p>
+<pre><code>UIGraphicsBeginImageContext(_image.frame.size);
+CGContextRef ctx = UIGraphicsGetCurrentContext();
+</code></pre><p>3.将图片渲染到上下文中。（这里也可以用image的draw方法）</p>
+<pre><code>//将imageView的layer渲染到上下文中
+   [_image.layer renderInContext:ctx];
+</code></pre><p>4.擦除上下文中图片。</p>
+<pre><code>CGContextClearRect(ctx, clearArea);
+</code></pre><p>CGContextClearRect函数会根据area参数擦除你上下文中绘制好的区域。</p>
+<p>5.获取擦除后的上下文图片。</p>
+<pre><code>UIImage *clearImage = UIGraphicsGetImageFromCurrentImageContext();
+</code></pre><p>6.关闭位图上下文。</p>
+<pre><code>UIGraphicsEndImageContext();
+</code></pre><p>7.使用擦除后的图片赋值。</p>
+<pre><code>_imageView.image = clearImage;
+</code></pre><p>可以依靠Quartz 2D的这种clear函数，实现刮刮乐：准备两张重叠的图片，对上层图片添加pan手势，采取如上处理。</p>
+<h1 id="屏幕截屏"><a href="#屏幕截屏" class="headerlink" title="屏幕截屏"></a>屏幕截屏</h1><p>1.开启图片上下文</p>
+<pre><code>UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0);
+CGContextRef ctx = UIGraphicsGetCurrentContext();
+</code></pre><p>2.渲染屏幕内容到上下文中。</p>
+<pre><code>[self.view.layer renderInContext:ctx];//layer渲染到上下文
+</code></pre><p>3.从上下文中获取图片。</p>
+<pre><code>UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+</code></pre><p>4.将图片转换为NSData。</p>
+<pre><code>NSData *dada = UIImagePNGRepresentation(clipImage);
+// UIImageJPEGRepresentation(clipImage, 1)
+//compressQuality 图片质量1 原质量
+</code></pre><p>5.图片写入指定路径。</p>
+<pre><code>[dada writeToFile:@&quot;/Users/Paranorman/Pictures/selfView.png&quot; atomically:YES];
+</code></pre><p>6.关闭上下文。</p>
+<pre><code>UIGraphicsEndImageContext();
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/Paranorman-Reborn-ACL" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 Paranorman<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
