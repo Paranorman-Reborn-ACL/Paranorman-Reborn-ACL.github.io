@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="心有猛虎细嗅蔷薇"/>
+        <meta property="og:title" content="多线程：pthread"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>归档：2017 - 心有猛虎细嗅蔷薇</title>
+    <title>多线程：pthread - 心有猛虎细嗅蔷薇</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -132,169 +132,67 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://img.tuku.com/upload/attach/2013/06/95038-7ivjRK3.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2017</h1>
+                <div class="post-heading">
+                    <h1>多线程：pthread</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-02-06
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2017/02/06/线程间通信/">
-        <h1 class="post-title archive">
-            线程间通信： NSPort
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-02-06
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h1><p>pthread 是 POSIX 多线程开发框架，由于是跨平台的 C 语言框架。</p>
+<h1 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h1><p>POSIX表示可移植操作系统接口（Portable Operating System Interface ，缩写为 POSIX ），POSIX标准定义了操作系统应该为应用程序提供的接口标准，是IEEE为要在各种UNIX操作系统上运行的软件而定义的一系列API标准的总称，其正式称呼为IEEE 1003，而国际标准名称为ISO/IEC 9945。</p>
+<h1 id="pthread使用"><a href="#pthread使用" class="headerlink" title="pthread使用"></a>pthread使用</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> * run(<span class="keyword">void</span> *param) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">100</span>; i++) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%d-------%@"</span>, i, [<span class="built_in">NSThread</span> currentThread]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> pthread_t thread;</div><div class="line"> <span class="keyword">int</span> result = pthread_create(&amp;thread, <span class="literal">NULL</span>, run, <span class="literal">NULL</span>);</div><div class="line"> <span class="keyword">if</span> (result) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"创建失败"</span>);</div><div class="line"> &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"创建成功"</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p><code>pthread_create</code>参数说明</p>
+<pre><code>1&gt; 指向线程标识符的指针，C 语言中类型的结尾通常 _t/Ref，而且不需要使用 *
+2&gt; 用来设置线程属性
+3&gt; 线程运行函数的起始地址
+4&gt; 运行函数的参数
+</code></pre><p>   返回值：</p>
+<pre><code>- 若线程创建成功，则返回0
+- 若线程创建失败，则返回出错编号
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2017/02/06/pthread/">
-        <h1 class="post-title archive">
-            多线程：pthread
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-02-06
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2017/01/28/Quartz 2D （四）开启图片上下文/">
-        <h1 class="post-title archive">
-            Quartz 2D(四)：Quartz 2D使用（Bitmap Context）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-28
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/27/Quarta 2D(三)上下文状态栈/">
-        <h1 class="post-title archive">
-            Quartz 2D(三)：上下文状态栈与Transform
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-27
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/27/Quartz 2D(二)/">
-        <h1 class="post-title archive">
-            Quartz 2D(二)：Quartz 2D使用（layer上下文）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-27
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/27/Quartz 2D(一)/">
-        <h1 class="post-title archive">
-            Quartz 2D(一)：基本概念介绍
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-27
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/22/Untitled/">
-        <h1 class="post-title archive">
-            hexo博客主题更换
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-22
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/22/NSOperation/">
-        <h1 class="post-title archive">
-            多线程之NSOperation
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-22
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/20/为常用的Blcok创建typedef/">
-        <h1 class="post-title archive">
-            Block(二)：Blcok的使用
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-20
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2017/01/18/Block/">
-        <h1 class="post-title archive">
-            Block(一)：语法与基本使用
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2017-01-18
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-        <li class="next"><a href="/archives/2017/page/2/">上一页  &rarr;</a></li>
-    
-</ul>
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />
