@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="线程间通信： NSPort"/>
+        <meta property="og:title" content="NSCharacterSet"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>线程间通信： NSPort - 心有猛虎细嗅蔷薇</title>
+    <title>NSCharacterSet - 心有猛虎细嗅蔷薇</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -140,12 +140,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>线程间通信： NSPort</h1>
+                    <h1>NSCharacterSet</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
-                        2017-02-06
+                        2017-02-10
                     </span>
                 </div>
             </div>
@@ -166,13 +166,11 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="常用的performSelector方法"><a href="#常用的performSelector方法" class="headerlink" title="常用的performSelector方法"></a>常用的performSelector方法</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//向主线程通信，传递Object。</span></div><div class="line">[<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(run) withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">YES</span>];</div><div class="line">[<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(run) withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">YES</span> modes:<span class="literal">nil</span>];</div><div class="line"> </div><div class="line"> <span class="comment">//隐式开辟子线程通信。</span></div><div class="line">[<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(run) withObject:<span class="literal">nil</span>];</div><div class="line">    </div><div class="line"> <span class="comment">//向指定线程通信。</span></div><div class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(run) onThread:[<span class="built_in">NSThread</span> mainThread] withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">YES</span>];</div><div class="line">[<span class="keyword">self</span>  performSelector:<span class="keyword">@selector</span>(run) onThread:[<span class="built_in">NSThread</span> mainThread] withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">YES</span> modes:<span class="literal">nil</span>];</div></pre></td></tr></table></figure>
-<h1 id="NSPort"><a href="#NSPort" class="headerlink" title="NSPort"></a>NSPort</h1><p>NSPort是一个描述通信通道的抽象类。通信发生在两个NSPort对象之中，这两个NSPort对象通常属于不同的进程或任务。分发对象系统使用NSPort对象来返回或发送NSProtMessage对象。你应该尽可能使用分发对象来完成应用间通信，必要时才使用NSPort对象。</p>
-<p>要接收发来的消息，NSPort对象必须作为输入源被添加到NSRunLoop对象中。NSConnection对象在初始化时自动添加它们的接收端口。</p>
-<p>当一个NSPort对象接收到一个端口消息，便把这条消息在handleMachMessage:或者handlePortMessge:消息中传送给它的代理。这个代理应该至少实现其中一个方法来处理要接收的消息，不管你想要实现什么功能。handleMachMessage:提供了一个早期的Mach内核消息，它以msg_header_t结构体为起始。handlePortMessage:提供了一个作为NSPortMessage对象的消息，这个对象是Mach消息面向对象的替代品。如果没有设置代理，这个NSPort对象会自己处理这条消息。</p>
-<p>当你使用NSPort对象完成消息处理，你必须首先使这个端口对象失效，然后再发送release消息。类似的处理还有，如果你的应用使用了垃圾回收，你必须先使端口失效，然后移除它的一些强引用。如果你没有是端口失效，就可能引起内存泄漏。要使端口失效，请调用invalidate方法。</p>
-<p>基础框架定义了三个具体的NSPort子类。NSMachPort和NSMessagePort只允许本地（在一样的机器上）通信。NSSocketPort允许本地和远程两种通讯，但是对于本地通信，NSSocketPort会更加耗费资源。创建NSPort对象，可以使用allocWithZone:或port，NSMachPort对象创建例外。</p>
-
+                <h1 id="NSCharacterSet"><a href="#NSCharacterSet" class="headerlink" title="NSCharacterSet"></a>NSCharacterSet</h1><p> NSCharacterSet和NSMutableCharacterSet是用来表示一组Unicode字符,它经常与NSString及NSScanner组合起来使用，在不同的字符上做过滤、删除或者分割操作。</p>
+<h2 id="系统提供的常用的创建NSCharacterSet的类方法"><a href="#系统提供的常用的创建NSCharacterSet的类方法" class="headerlink" title="系统提供的常用的创建NSCharacterSet的类方法"></a>系统提供的常用的创建NSCharacterSet的类方法</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">NSCharacterSet</span> alphanumericCharacterSet];          <span class="comment">//所有数字和字母(大小写)  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> decimalDigitCharacterSet];          <span class="comment">//0-9的数字  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> letterCharacterSet];                <span class="comment">//所有字母  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> lowercaseLetterCharacterSet];       <span class="comment">//小写字母  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> uppercaseLetterCharacterSet];       <span class="comment">//大写字母  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> punctuationCharacterSet];           <span class="comment">//标点符号  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> whitespaceAndNewlineCharacterSet];  <span class="comment">//空格和换行符  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> whitespaceCharacterSet];            <span class="comment">//空格</span></div></pre></td></tr></table></figure>
+<h2 id="通过自定义创建NSCharacterSet的方法"><a href="#通过自定义创建NSCharacterSet的方法" class="headerlink" title="通过自定义创建NSCharacterSet的方法"></a>通过自定义创建NSCharacterSet的方法</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">NSCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"Hello"</span>]; <span class="comment">//String中的文字组成的set  </span></div><div class="line">[<span class="built_in">NSCharacterSet</span> characterSetWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">48</span>, <span class="number">10</span>)]];<span class="comment">//ascll码，此处为(0-9)  </span></div><div class="line">[[<span class="built_in">NSCharacterSet</span> decimalDigitCharacterSet] invertedSet];<span class="comment">//数字之外的字符组成的set&lt;/span&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="NSMutableCharacter的方法"><a href="#NSMutableCharacter的方法" class="headerlink" title="NSMutableCharacter的方法"></a>NSMutableCharacter的方法</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSMutableCharacterSet</span> *set1 = [<span class="built_in">NSMutableCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"Hell"</span>];  </div><div class="line"><span class="built_in">NSMutableCharacterSet</span> *set2 = [<span class="built_in">NSMutableCharacterSet</span> characterSetWithCharactersInString:<span class="string">@"ello"</span>]; </div><div class="line"><span class="comment">//去掉某些字符  </span></div><div class="line">[set2 removeCharactersInString:<span class="string">@"e"</span>]; <span class="comment">//---&gt;l, o  </span></div><div class="line"><span class="comment">//加上某些字符  </span></div><div class="line">[set2 addCharactersInString:<span class="string">@"e"</span>];    <span class="comment">//---&gt;e, l, o  </span></div><div class="line"><span class="comment">//set相加  </span></div><div class="line">[set2 formUnionWithCharacterSet:set1]; <span class="comment">//---&gt;H,e,l,o  </span></div><div class="line"><span class="comment">//set交集 </span></div><div class="line">[set2 formIntersectionWithCharacterSet:set1]; <span class="comment">//---&gt;e,l </span></div><div class="line"><span class="comment">//set取反</span></div><div class="line">[set2 invert];</div></pre></td></tr></table></figure>
+<h2 id="去掉多余的空格"><a href="#去掉多余的空格" class="headerlink" title="去掉多余的空格"></a>去掉多余的空格</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *exampleStr = <span class="string">@" My name    is Johnny!"</span>;  </div><div class="line">exampleStr = [exampleStr stringByTrimmingCharactersInSet:[<span class="built_in">NSCharacterSet</span> whitespaceCharacterSet]];  </div><div class="line"><span class="built_in">NSArray</span> *exampleArr = [exampleStr componentsSeparatedByCharactersInSet:[<span class="built_in">NSCharacterSet</span> whitespaceCharacterSet]];  </div><div class="line"><span class="built_in">NSPredicate</span> *predicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"self &lt;&gt; ''"</span>];  </div><div class="line">exampleArr = [exampleArr filteredArrayUsingPredicate:predicate];  </div><div class="line">exampleStr = [exampleArr componentsJoinedByString:<span class="string">@" "</span>];</div></pre></td></tr></table></figure>
 
                 
             </div>

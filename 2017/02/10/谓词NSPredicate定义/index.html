@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="戒掉那个总是就随随便便放弃的自己。">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Paranorman">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="NSPredicate:谓词"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="戒掉那个总是就随随便便放弃的自己。" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="心有猛虎细嗅蔷薇"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>NSPredicate:谓词 - 心有猛虎细嗅蔷薇</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="http://img4.duitang.com/uploads/item/201505/02/20150502174823_3PMmR.thumb.224_0.jpeg">
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">一个嗜好很多能力很小的普通人</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/Paranorman-Reborn-ACL">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://img.tuku.com/upload/attach/2013/06/95038-7ivjRK3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>NSPredicate:谓词</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-02-10
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="谓词NSPredicate定义"><a href="#谓词NSPredicate定义" class="headerlink" title="谓词NSPredicate定义"></a>谓词NSPredicate定义</h1><p>谓词由NSPredicate对象来代表，NSPredicate用于定义一个逻辑条件，通过该条件可以执行搜索或内存中的过滤操作。</p>
+<h2 id="基本使用-evaluateWithObject"><a href="#基本使用-evaluateWithObject" class="headerlink" title="基本使用:evaluateWithObject"></a>基本使用:evaluateWithObject</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSPredicate</span> *pred = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"name like 's*'"</span>];</div><div class="line">AGPerson *person1 = [[AGPerson alloc] init];</div><div class="line">person1.name = <span class="string">@"asssss"</span>;</div><div class="line"><span class="comment">//通过KVC:[person1 valueForKeyPath:@"name"]来获取person1的name数值</span></div><div class="line"><span class="comment">//判断person1是否遵循这个pred的谓词规则(逻辑条件)</span></div><div class="line"><span class="built_in">BOOL</span> result = [pred evaluateWithObject:person1];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"person1 是否以s开头 %d"</span>, result);</div></pre></td></tr></table></figure>
+<h2 id="集合中使用NSPredicate"><a href="#集合中使用NSPredicate" class="headerlink" title="集合中使用NSPredicate"></a>集合中使用NSPredicate</h2><p>Foundation提供使用谓词（Predicate）来过滤NSArray／NSMutableArray/NSSet／NSMutableSet的方法。</p>
+<p>不可变的集合，NSArray&amp;NSSet，有可以通过评估接收到的predicate来返回一个不可变集合的方法filteredArrayUsingPredicate:和filteredSetUsingPredicate:。</p>
+<p>可变集合，NSMutableArray&amp;NSMutableSet，可以使用方法filterUsingPredicate:，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</p>
+<p>NSDictionary可以用谓词来过滤它的键和值（两者都为NSArray对象）。NSOrderedSet可以由过滤的NSArray或NSSet生成一个新的有序的集，或者NSMutableSet可以简单的removeObjectsInArray:，来传递通过_否定_predicate过滤的对象。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithObjects:@<span class="number">30</span>, @<span class="number">40</span>, @<span class="number">50</span>, @<span class="number">60</span>, @<span class="number">70</span>, @<span class="number">80</span>, @<span class="number">90</span>,<span class="literal">nil</span>];</div><div class="line"><span class="built_in">NSPredicate</span> *predArray = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"self &gt; 50"</span>];</div><div class="line">[array filterUsingPredicate:predArray];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"数组过滤后:%@"</span>, array);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSSet *set = [NSSet setWithObjects:</div><div class="line">                  [AGPerson agPersonWithName:@&quot;孙悟空&quot;],</div><div class="line">                  [AGPerson agPersonWithName:@&quot;猪八戒&quot;],</div><div class="line">                  [AGPerson agPersonWithName:@&quot;沙悟净&quot;],</div><div class="line">                  [AGPerson agPersonWithName:@&quot;金角大王&quot;],</div><div class="line">                  [AGPerson agPersonWithName:@&quot;银角大王&quot;], nil];</div><div class="line">NSPredicate *setPredicate = [NSPredicate predicateWithFormat:@&quot;name CONTAINS &apos;大王&apos;&quot;];</div><div class="line">NSSet *newSet = [set filteredSetUsingPredicate:setPredicate];</div><div class="line">NSLog(@&quot; %@&quot;, newSet);</div></pre></td></tr></table></figure>
+<h2 id="Core-Data中使用NSPredicate"><a href="#Core-Data中使用NSPredicate" class="headerlink" title="Core Data中使用NSPredicate"></a>Core Data中使用NSPredicate</h2><p>NSFetchRequest有一个predicate属性，它可以指定管理对象应该被获取的逻辑条件。谓词的使用规则在这里同样适用，唯一的区别在于，在管理对象环境中，谓词由持久化存储助理（persistent store coordinator）评估，而不像集合那样在内存中被过滤。</p>
+<h2 id="谓词中使用占位符参数"><a href="#谓词中使用占位符参数" class="headerlink" title="谓词中使用占位符参数"></a>谓词中使用占位符参数</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">%@是对值为字符串，数字或者日期的对象的替换值。</div><div class="line">%K是key path的替换值。</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *propPath =<span class="string">@"name"</span>;</div><div class="line"><span class="built_in">NSString</span> *value = <span class="string">@"大王"</span>;</div><div class="line"><span class="built_in">NSPredicate</span> *pred2 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"%K CONTAINS %@"</span>,propPath, value];</div><div class="line"><span class="built_in">NSSet</span> *newSet2 = [set filteredSetUsingPredicate:pred2];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@" %@"</span>, newSet2);</div></pre></td></tr></table></figure>
+<p>$SUBSTR是可以被NSPredicate -predicateWithSubstitutionVariables:替换的值。</p>
+<pre><code>NSPredicate *predTemp = [NSPredicate     predicateWithFormat:@&quot;%K  CONTAINS $SUBSTR&quot;, @&quot;name&quot;];
+ NSPredicate *predTemp1 = [predTemp          predicateWithSubstitutionVariables:[NSDictionary  dictionaryWithObjects:@[@&quot;孙&quot;] forKeys:@[@&quot;SUBSTR&quot;]]];
+ NSLog(@&quot; %@&quot;, [set filteredSetUsingPredicate:predTemp1]);
+</code></pre><h1 id="谓词语法"><a href="#谓词语法" class="headerlink" title="谓词语法"></a>谓词语法</h1><h3 id="基本比较"><a href="#基本比较" class="headerlink" title="基本比较"></a>基本比较</h3><ul>
+<li>=, ==：左边的表达式和右边的表达式相等。</li>
+<li><blockquote>
+<p>=, =&gt;：左边的表达式大于或者等于右边的表达式。</p>
+</blockquote>
+</li>
+<li>&lt;=, =&lt;：左边的表达式小于等于右边的表达式。</li>
+<li><blockquote>
+<p>：左边的表达式大于右边的表达式。</p>
+</blockquote>
+</li>
+<li>&lt;：左边的表达式小于右边的表达式。</li>
+<li>!=, &lt;&gt;：左边的表达式不等于右边的表达式。</li>
+<li>BETWEEN：左边的表达式等于右边的表达式的值或者介于它们之间。右边是一个有两个指定上限和下限的数值的数列（指定顺序的数列）。比如，1 BETWEEN { 0 , 33 }，或者$INPUT BETWEEN { $LOWER, $UPPER }。</li>
+</ul>
+<h3 id="基本复合谓词"><a href="#基本复合谓词" class="headerlink" title="基本复合谓词"></a>基本复合谓词</h3><ul>
+<li>AND, &amp;&amp;：逻辑与.</li>
+<li>OR, ||：逻辑或.</li>
+<li>NOT, !：逻辑非.</li>
+</ul>
+<h3 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h3><p>字符串比较在默认的情况下是区分大小写和音调的。你可以在方括号中用关键字符c和d来修改操作符以相应的指定不区分大小写和变音符号，比如firstname BEGINSWITH[cd] $FIRST_NAME。</p>
+<ul>
+<li>BEGINSWITH：左边的表达式以右边的表达式作为开始。</li>
+<li>CONTAINS：左边的表达式包含右边的表达式。</li>
+<li>ENDSWITH：左边的表达式以右边的表达式作为结束。</li>
+<li>LIKE：左边的表达式等于右边的表达式：?和<em>可作为通配符，其中?匹配1个字符，</em>匹配0个或者多个字符。</li>
+<li>MATCHES：左边的表达式根据ICU v3的regex风格比较，等于右边的表达式。</li>
+</ul>
+<h3 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h3><ul>
+<li>ANY，SOME：指定下列表达式中的任意元素。比如，ANY children.age &lt; 18。</li>
+<li>ALL：指定下列表达式中的所有元素。比如，ALL children.age &lt; 18。</li>
+<li>NONE：指定下列表达式中没有的元素。比如，NONE children.age &lt; 18。它在逻辑上等于NOT (ANY …)。</li>
+<li>IN：等于SQL的IN操作，左边的表达必须出现在右边指定的集合中。比如，name IN { ‘Ben’, ‘Melissa’, ‘Nick’ }。</li>
+</ul>
+<h3 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h3><ul>
+<li>array[index]：指定数组中特定索引处的元素。</li>
+<li>array[FIRST]：指定数组中的第一个元素。</li>
+<li>array[LAST]：指定数组中的最后一个元素。</li>
+<li>array[SIZE]：指定数组的大小</li>
+</ul>
+<h3 id="布尔值谓词"><a href="#布尔值谓词" class="headerlink" title="布尔值谓词"></a>布尔值谓词</h3><ul>
+<li>TRUEPREDICATE：结果始终为真的谓词。</li>
+<li>FALSEPREDICATE：结果始终为假的谓词。</li>
+</ul>
+<h1 id="NSCompoundPredicate"><a href="#NSCompoundPredicate" class="headerlink" title="NSCompoundPredicate"></a>NSCompoundPredicate</h1><p>我们见过与&amp;或被用在谓词格式字符串中以创建复合谓词。然而，我们也可以用NSCompoundPredicate来完成同样的工作。</p>
+<p>例如，下列谓词是相等的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@&quot;age &gt; 25&quot;], [NSPredicate predicateWithFormat:@&quot;firstName = %@&quot;, @&quot;Quentin&quot;]]];</div><div class="line"></div><div class="line">[NSPredicate predicateWithFormat:@&quot;(age &gt; 25) AND (firstName = %@)&quot;, @&quot;Quentin&quot;];</div></pre></td></tr></table></figure>
+<p>虽然语法字符串文字更加容易输入，但是在有的时候，你需要结合现有的谓词。在那些情况下，你可以使用NSCompoundPredicate -andPredicateWithSubpredicates:&amp;-orPredicateWithSubpredicates:。</p>
+<h1 id="NSComparisonPredicate"><a href="#NSComparisonPredicate" class="headerlink" title="NSComparisonPredicate"></a>NSComparisonPredicate</h1><p>就像NSCompoundPredicate一样，NSComparisonPredicate从子部件构建了一个NSPredicate－－在这种情况下，左侧和右侧都是NSExpression。 分析它的类的构造函数可以让我们一窥NSPredicate的格式字符串是如何解析的：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSPredicate</span> *)predicateWithLeftExpression:(<span class="built_in">NSExpression</span> *)lhs</div><div class="line">                             rightExpression:(<span class="built_in">NSExpression</span> *)rhs</div><div class="line">                                    modifier:(<span class="built_in">NSComparisonPredicateModifier</span>)modifier</div><div class="line">                                        type:(<span class="built_in">NSPredicateOperatorType</span>)type</div><div class="line">                                     options:(<span class="built_in">NSUInteger</span>)options</div></pre></td></tr></table></figure>
+<p>参数</p>
+<ul>
+<li>lhs：左边的表达式。</li>
+<li>rhs：右边的表达式。</li>
+<li>modifier：应用的修改符。（ANY或者ALL）</li>
+<li>type：谓词运算符类型。</li>
+<li>options：要应用的选项。没有选项的话则为0。</li>
+</ul>
+<p>NSComparisonPredicate选项</p>
+<ul>
+<li>NSCaseInsensitivePredicateOption：不区分大小写的谓词。你通过在谓词格式字符串中加入后面带有[c]的字符串操作（比如，”NeXT” like[c] “next”）来表达这一选项。</li>
+<li>NSDiacriticInsensitivePredicateOption：忽视发音符号的谓词。你通过在谓词格式字符串中加入后面带有[d]的字符串操作（比如，”naïve” like[d] “naive”）来表达这一选项。</li>
+<li>NSNormalizedPredicateOption：表示待比较的字符串已经被预处理了。这一选项取代了NSCaseInsensitivePredicateOption和NSDiacriticInsensitivePredicateOption，旨在用作性能优化的选项。你可以通过在谓词格式字符串中加入后面带有[n]的字符串（比如，”WXYZlan” matches[n] “.lan”）来表达这一选项。</li>
+<li>NSLocaleSensitivePredicateOption：表明要使用&lt;，&lt;=，=，=&gt;，&gt; 作为比较的字符串应该使用区域识别的方式处理。你可以通过在&lt;，&lt;=，=，=&gt;，&gt;其中之一的操作符后加入[l]（比如，”straße” &gt;[l] “strasse”）以便在谓词格式字符串表达这一选项。</li>
+</ul>
+<h1 id="Block谓词"><a href="#Block谓词" class="headerlink" title="Block谓词"></a>Block谓词</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSPredicate</span> *shortNamePredicate = [<span class="built_in">NSPredicate</span> predicateWithBlock:^<span class="built_in">BOOL</span>(<span class="keyword">id</span> evaluatedObject, <span class="built_in">NSDictionary</span> *bindings) &#123;</div><div class="line">           <span class="keyword">return</span> [[evaluatedObject firstName] length] &lt;= <span class="number">5</span>;</div><div class="line">       &#125;];</div><div class="line"></div><div class="line"><span class="comment">// ["Alice Smith", "Bob Jones"]</span></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"Short Names: %@"</span>, [people 	filteredArrayUsingPredicate:shortNamePredicate]);</div></pre></td></tr></table></figure>
+<p>..好吧，虽然使用predicateWithBlock:是懒人的做法，但它也并不是一无是处。</p>
+<p>事实上，因为block可以封装任意的计算，所以有一个查询类是无法以NSPredicate格式字符串形式来表达的（比如对运行时被动态计算的值的评估）。而且当同一件事情可以用NSExpression结合自定义选择器来完成时，block为完成工作提供了一个方便的接口。</p>
+<p>重要提示：由predicateWithBlock:生成的NSPredicate不能用于由SQLite存储库支持的Core Data数据的提取要求。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/Paranorman-Reborn-ACL" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 Paranorman<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
