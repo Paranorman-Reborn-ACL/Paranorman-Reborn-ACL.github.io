@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="戒掉那个总是就随随便便放弃的自己。">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Paranorman">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Mac OS X 10.12.2安装cocoapods以及遇到的问题"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="戒掉那个总是就随随便便放弃的自己。" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="心有猛虎细嗅蔷薇"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Mac OS X 10.12.2安装cocoapods以及遇到的问题 - 心有猛虎细嗅蔷薇</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="http://img4.duitang.com/uploads/item/201505/02/20150502174823_3PMmR.thumb.224_0.jpeg">
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">一个嗜好很多能力很小的普通人</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/Paranorman-Reborn-ACL">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://img.tuku.com/upload/attach/2013/06/95038-7ivjRK3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Mac OS X 10.12.2安装cocoapods以及遇到的问题</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2017-02-11
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>电脑重装了Mac OS X 10.12.2，需要重新安装CocoaPods。但是在安装过程中出现了一些问题，所以重新梳理了安装流程与问题。</p>
+<h1 id="CocoaPods的原理"><a href="#CocoaPods的原理" class="headerlink" title="CocoaPods的原理"></a>CocoaPods的原理</h1><p>CocoaPods的原理是将所有的依赖库都放到另一个名为Pods的项目中，然后让主项目依赖Pods项目，这样，源码管理工作都从主项目移到了Pods项目中。Pods项目最终会编译成一个名为libPods.a的文件，主项目只需要依赖这个.a文件即可。</p>
+<h1 id="CocoaPods的安装"><a href="#CocoaPods的安装" class="headerlink" title="CocoaPods的安装"></a>CocoaPods的安装</h1><p>CocoaPods可以方便地通过Mac自带的RubyGems安装。<br>(RubyGems（简称 gems）是一个用于对 Ruby组件进行打包的 Ruby 打包系统。 它提供一个分发 Ruby 程序和库的标准格式，还提供一个管理程序包安装的工具)</p>
+<p>打开Terminal（Mac电脑自带的终端），然后按照以下提示操作即可：</p>
+<h2 id="1-设置Ruby软件源"><a href="#1-设置Ruby软件源" class="headerlink" title="1.设置Ruby软件源"></a>1.设置Ruby软件源</h2><p>这是因为ruby的软件源rubygems.org因为使用亚马逊的云服务，被我天朝屏蔽了，需要更新一下ruby的源，过程如下：</p>
+<ul>
+<li><p>gem sources -l #(查看当前ruby的源)</p>
+</li>
+<li><p>gem sources –remove <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a> #(移除当前ruby的源)</p>
+</li>
+<li><p>gem sources -a <a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a> #(设置当前ruby的源为我天朝的)</p>
+</li>
+<li><p>gem sources -l #(再次查看当前ruby的源)</p>
+</li>
+</ul>
+<p>如果Terminal输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">https://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<p>就证明ruby的软件源已经设置OK了。</p>
+<h2 id="2-设置gem为最新版本"><a href="#2-设置gem为最新版本" class="headerlink" title="2.设置gem为最新版本"></a>2.设置gem为最新版本</h2><p>Terminal输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem update --system</div></pre></td></tr></table></figure>
+<p>升级成功后会提示: Latest version currently installed. Aborting.</p>
+<h2 id="3-安装CocoaPods"><a href="#3-安装CocoaPods" class="headerlink" title="3.安装CocoaPods"></a>3.安装CocoaPods</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install  cocoapods</div></pre></td></tr></table></figure>
+<h3 id="如果报以下错误："><a href="#如果报以下错误：" class="headerlink" title="如果报以下错误："></a>如果报以下错误：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ERROR:  While executing gem ... (Errno::EPERM)</div><div class="line"></div><div class="line">Operation not permitted - /usr/bin/xcodeproj</div></pre></td></tr></table></figure>
+<h3 id="解决方案如下："><a href="#解决方案如下：" class="headerlink" title="解决方案如下："></a>解决方案如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo gem install -n /usr/local/bin cocoapods</div><div class="line"></div><div class="line">$ pod setup</div></pre></td></tr></table></figure>
+<p>安装成功后,你会看到:Setup completed</p>
+<h2 id="4-Cocoapods的使用"><a href="#4-Cocoapods的使用" class="headerlink" title="4.Cocoapods的使用"></a>4.Cocoapods的使用</h2><p>随便以一种方式新建一个名为Podfile的文件放到你的工程根目录下（不能写成别的名字，也可以自己在工程根目录里面直接新建）</p>
+<h4 id="方式1：通过Vim命令创建并且编辑Podfile文件"><a href="#方式1：通过Vim命令创建并且编辑Podfile文件" class="headerlink" title="方式1：通过Vim命令创建并且编辑Podfile文件"></a>方式1：通过Vim命令创建并且编辑Podfile文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim Podfile</div></pre></td></tr></table></figure>
+<h4 id="方式2：通过touch命令创建-open命令来编辑Podfile文件"><a href="#方式2：通过touch命令创建-open命令来编辑Podfile文件" class="headerlink" title="方式2：通过touch命令创建 open命令来编辑Podfile文件"></a>方式2：通过touch命令创建 open命令来编辑Podfile文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ touch Podfile  (创建一个podfile)</div><div class="line">$ open -e Podfile (打开podfile文件)</div></pre></td></tr></table></figure>
+<p>Podfile文件格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos; #(注明你的开发平台以及版本，&apos;8.0&apos;忽略不写即为最新版本)</div><div class="line"></div><div class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 3.1.0&apos; #(&apos;~&gt; 3.1.0&apos;为版本号，忽略不写即为最新版本)</div><div class="line"></div><div class="line">pod &apos;SDWebImage&apos;, &apos;~&gt; 3.7.2&apos;</div></pre></td></tr></table></figure>
+<p>在终端输入如下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod install</div></pre></td></tr></table></figure>
+<p>这样，AFNetworking和SDWebImage就已经下载完成并且设置好了编译参数和依赖，以后使用的时候切记如下两点：</p>
+<p>1.从此以后需要使用Cocoapods生成的 .xcworkspace文件来打开工程，而不是使用以前的.xcodeproj文件</p>
+<p>2.每次更改了Podfile文件，都需要重新执行一次pod update命令</p>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h4 id="问题1："><a href="#问题1：" class="headerlink" title="问题1："></a>问题1：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Library/Ruby/Site/2.0.0/rubygems.rb:250:in `find_spec_for_exe&apos;: can&apos;t find gem cocoapods (&gt;= 0.a) (Gem::GemNotFoundException)</div><div class="line">from /Library/Ruby/Site/2.0.0/rubygems.rb:278:in `activate_bin_path&apos;</div><div class="line">from /usr/local/bin/pod:22:in  &apos;&lt;main&gt;&apos;&apos;</div></pre></td></tr></table></figure>
+<p>原因：是由于ruby环境太低导致。<br>解决方法：（更新gem）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem update --system</div></pre></td></tr></table></figure>
+<h4 id="问题2："><a href="#问题2：" class="headerlink" title="问题2："></a>问题2：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Analyzing dependencies</div><div class="line">[!] The dependency `AFNetworking (~&gt; 3.1.0)` is not used in any concrete target</div></pre></td></tr></table></figure>
+<p>不是正确的target。</p>
+<p>修改方法：更改podfile文件里面的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arget &apos;aaaa&apos; do   (aaaa为工程名,一定注意单引号的特殊性，用xcode打开并且写出 &apos; &apos; ,格式不正确也不行)</div><div class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 3.1.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<h4 id="问题3：添加类库方法二-更快捷"><a href="#问题3：添加类库方法二-更快捷" class="headerlink" title="问题3：添加类库方法二(更快捷)"></a>问题3：添加类库方法二(更快捷)</h4><p><img src="http://upload-images.jianshu.io/upload_images/1025776-37370fea6f87ea7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="问题4：有的时候你的第三方库有-有的没有-例如-我原来工程里面有AFNetworking-但是没有MJExtension-我想更新类库-同时又不更新已经存在的类库-终端代码如下"><a href="#问题4：有的时候你的第三方库有-有的没有-例如-我原来工程里面有AFNetworking-但是没有MJExtension-我想更新类库-同时又不更新已经存在的类库-终端代码如下" class="headerlink" title="问题4：有的时候你的第三方库有,有的没有.例如:我原来工程里面有AFNetworking,但是没有MJExtension,我想更新类库,同时又不更新已经存在的类库.终端代码如下:"></a>问题4：有的时候你的第三方库有,有的没有.例如:我原来工程里面有AFNetworking,但是没有MJExtension,我想更新类库,同时又不更新已经存在的类库.终端代码如下:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod install --no-repo-update</div></pre></td></tr></table></figure>
+<h4 id="问题5：Error-installing-cocoapods-activesupport-requires-Ruby-version-gt-2-2-2"><a href="#问题5：Error-installing-cocoapods-activesupport-requires-Ruby-version-gt-2-2-2" class="headerlink" title="问题5：Error installing cocoapods:activesupport requires Ruby version &gt;= 2.2.2."></a>问题5：Error installing cocoapods:activesupport requires Ruby version &gt;= 2.2.2.</h4><p>Ruby环境太低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gem update --system</div></pre></td></tr></table></figure>
+<h4 id="问题6：-Invalid-Podfile-file-syntax-error-unexpected-end-of-input-expecting-keyword-end"><a href="#问题6：-Invalid-Podfile-file-syntax-error-unexpected-end-of-input-expecting-keyword-end" class="headerlink" title="问题6：[!] Invalid Podfile file: syntax error, unexpected end-of-input, expecting keyword_end."></a>问题6：[!] Invalid <code>Podfile</code> file: syntax error, unexpected end-of-input, expecting keyword_end.</h4><p>在Podfile的末尾添加 end</p>
+<h4 id="问题7：无论是执行pod-install还是pod-update都卡在了Analyzing-dependencies不动"><a href="#问题7：无论是执行pod-install还是pod-update都卡在了Analyzing-dependencies不动" class="headerlink" title="问题7：无论是执行pod install还是pod update都卡在了Analyzing dependencies不动"></a>问题7：无论是执行pod install还是pod update都卡在了Analyzing dependencies不动</h4><p>原因在于当执行以上两个命令的时候会升级CocoaPods的spec仓库，加一个参数可以省略这一步，然后速度就会提升不少。加参数的命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod install --verbose --no-repo-update</div><div class="line"></div><div class="line">pod update --verbose --no-repo-update</div></pre></td></tr></table></figure>
+<h4 id="问题8：build-diff-Podfile-lock-No-such-file-or-directory"><a href="#问题8：build-diff-Podfile-lock-No-such-file-or-directory" class="headerlink" title="问题8：build diff: /../Podfile.lock: No such file or directory"></a>问题8：build diff: /../Podfile.lock: No such file or directory</h4><p>在工程设置中的Build Phases下删除Check Pods Manifest.lock及Copy Pods Resources</p>
+<h4 id="问题9：Unable-to-find-the-Xcode-project-Volumes-BIAO-iOS-code-MBWB-xcodeproj-for-the-target-Pods"><a href="#问题9：Unable-to-find-the-Xcode-project-Volumes-BIAO-iOS-code-MBWB-xcodeproj-for-the-target-Pods" class="headerlink" title="问题9：Unable to find the Xcode project /Volumes/BIAO/iOS/code/MBWB.xcodeproj for the target Pods."></a>问题9：Unable to find the Xcode project <code>/Volumes/BIAO/iOS/code/MBWB.xcodeproj</code> for the target <code>Pods</code>.</h4><p>在Podfile中 将  project ‘Demo/Demo.project’  改成  project ‘Demo.project’</p>
+<h4 id="问题10：Could-not-automatically-select-an-Xcode-project-Specify-one-in-your-Podfile-like-so-xcodeproj-‘path-to-Project-xcodeproj’"><a href="#问题10：Could-not-automatically-select-an-Xcode-project-Specify-one-in-your-Podfile-like-so-xcodeproj-‘path-to-Project-xcodeproj’" class="headerlink" title="问题10：Could not automatically select an Xcode project. Specify one in your Podfile like so:xcodeproj ‘path/to/Project.xcodeproj’"></a>问题10：Could not automatically select an Xcode project. Specify one in your Podfile like so:xcodeproj ‘path/to/Project.xcodeproj’</h4><p>在Podfile文件里指定下工程目录就行了</p>
+<p>xcodeproj ‘Demo/Demo.xcodeproj’</p>
+<p>但是如果cocoapods版本为（1.0.0）的话，可能会有以下警告</p>
+<p>[!] xcodeproj was renamed to <code>project</code>. Please use that from now on.</p>
+<p>这时只需要把xcodeproj改为 project就行了</p>
+<p>project ‘Demo/Demo.project’</p>
+<h1 id="在项目中移除CocoaPods三方库配置文件"><a href="#在项目中移除CocoaPods三方库配置文件" class="headerlink" title="在项目中移除CocoaPods三方库配置文件"></a>在项目中移除CocoaPods三方库配置文件</h1><p>如果我们在配置CocoaPods的三方库文件后，不在需要了可以移除指定库文件配置，具体步骤如下：</p>
+<ul>
+<li>删除工程文件夹下的Podfile、Podfile.lock和Pods文件夹；</li>
+<li>删除xcworkspace文件；</li>
+<li>打开xcodeproj文件，删除项目中的libpods.a和Pods.xcconfig引用；</li>
+<li>打开Build Phases选项，删除Check Pods Manifest.lock和Copy Pods Resources；</li>
+<li>重新pod install</li>
+</ul>
+<h1 id="CocoaPods工作原理："><a href="#CocoaPods工作原理：" class="headerlink" title="CocoaPods工作原理："></a>CocoaPods工作原理：</h1><p>CocoaPods的工作主要是通过ProjectName.xcworkspace来组织的，在打开ProjectName.xcworkspace文件后，发现Xcode会多出一个Pods工程。</p>
+<ul>
+<li><p>库文件引入及配置：<br>库文件的引入主要由Pods工程中的Pods-ProjectName-frameworks.sh脚本负责，在每次编译的时候，该脚本会帮你把预引入的所有三方库文件打包的成ProjectName.a静态库文件，放在我们原Xcode工程中Framework文件夹下，供工程使用。</p>
+</li>
+<li><p>Resource文件：<br>Resource资源文件主要由Pods工程中的Pods-ProjectName-resources.sh脚本负责，在每次编译的时候，该脚本会帮你将所有三方库的Resource文件copy到目标目录中。</p>
+</li>
+<li><p>依赖参数设置：<br>在Pods工程中的的每个库文件都有一个相应的SDKName.xcconfig，在编译时，CocoaPods就是通过这些文件来设置所有的依赖参数的，编译后，在主工程的Pods文件夹下会生成两个配置文件，Pods-ProjectName.debug.xcconfig、Pods-ProjectName.release.xcconfig。</p>
+</li>
+</ul>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/Paranorman-Reborn-ACL" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 Paranorman<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
